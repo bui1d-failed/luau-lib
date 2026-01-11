@@ -1637,7 +1637,7 @@
 
 				task.spawn(function()
 					while task.wait(1) do 
-						watermark.change_text(os.date('Atlanta - Beta - %b %d %Y - %H:%M:%S'))
+						watermark.change_text(os.date('Koishi Hook - OwO - %b %d %Y - %H:%M:%S'))
 					end 
 				end) 
 
