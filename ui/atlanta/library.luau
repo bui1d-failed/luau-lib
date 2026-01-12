@@ -616,7 +616,7 @@
 					Position = dim2(0, 0, 0, -1),
 					BorderSizePixel = 0,
 					AutomaticSize = Enum.AutomaticSize.X,
-					TextSize = 12,
+					TextSize = 9,
 					BackgroundColor3 = rgb(255, 255, 255)
 				})
 				
