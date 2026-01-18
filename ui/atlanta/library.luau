@@ -3937,7 +3937,7 @@
 				hue_picker.Position = dim2(0, 0, value, offset)
 
 				local offset = (a < 1) and 0 or -4
-				alpha_picker.Position = dim2(a, offset, 0, 0)
+				alpha_picker.Position = dim2(1 - a, offset, 0, 0)
 
 				alpha_drag.BackgroundColor3 = Color3.fromHSV(h, s, v)
 				
