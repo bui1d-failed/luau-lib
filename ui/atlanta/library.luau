@@ -1197,15 +1197,19 @@
 				});	
 
 				local section = setmetatable(items, library)
-				items.playerLabel = section:label({name = "Player: "})
-				items.distanceLabel = section:label({name = "Distance: "})
-				items.levelLabel = section:label({name = "Level: "})
-				
+
+                --items.playerTextLabel = section:label({name = "Player", TextXAlignment = Enum.TextXAlignment.Left})
+                items.playerTextLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Left})
+                
+                items.distanceTextLabel = section:label({name = "Distance", TextXAlignment = Enum.TextXAlignment.Left})
+                items.distanceValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right})
+                
+                items.levelTextLabel = section:label({name = "Level", TextXAlignment = Enum.TextXAlignment.Left})
+                items.levelValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right})
+
 				items.slider = section:slider({name = "", min = 0, max = 100, default = 50, input = true})
 				
-				library:create( "UIStroke" , {
-					Parent = items.InfoTitle
-				});            
+				library:create("UIStroke" , {Parent = items.InfoTitle});
 			end
 
 			function cfg.set_visible(bool)
@@ -1221,11 +1225,16 @@
 			end
 
 			function cfg.change_profile(player, distance, level)
-				items.playerLabel.set(string.format("%s (%s)", player.Name, player.DisplayName))
-				items.distanceLabel.set(string.format("Distance: %s studs", math.round(distance)))
-				items.levelLabel.set(string.format("Level: %s", level))
-				items.Profile.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
-			end 
+                items.playerTextLabel.set(string.format("%s (%s)", player.Name, player.DisplayName))
+            
+                items.distanceTextLabel.set("Distance")
+                items.distanceValueLabel.set(string.format("%s studs", math.round(distance)))
+            
+                items.levelTextLabel.set("Level")
+                items.levelValueLabel.set(tostring(level))
+            
+                items.Profile.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
+            end
 
 			return setmetatable(cfg, library)
 		end     
