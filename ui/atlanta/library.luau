@@ -495,9 +495,15 @@
 			return floor(number * multiplier + 0.5) / multiplier
 		end 
 
-		function library:apply_theme(instance, theme, property) 
+		--[[function library:apply_theme(instance, theme, property) 
 			insert(themes.utility[theme][property], instance)
-		end
+		end]]
+		
+		function library:apply_theme(instance, theme, property)
+            themes.utility[theme] = themes.utility[theme] or {}
+            themes.utility[theme][property] = themes.utility[theme][property] or {}
+            table.insert(themes.utility[theme][property], instance)
+        end
 
 		function library:update_theme(theme, color)
 			for _, property in next, themes.utility[theme] do 
