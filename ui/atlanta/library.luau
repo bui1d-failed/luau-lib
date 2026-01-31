@@ -1,4 +1,4 @@
--- variables
+        -- variables
 	local uis = cloneref(game:GetService("UserInputService"))
 	local players = cloneref(game:GetService("Players"))
 	local ws = cloneref(game:GetService("Workspace"))
@@ -1197,8 +1197,11 @@
 				});	
 
 				local section = setmetatable(items, library)
-				items.label = section:label({name = "Player: "})
-				items.slider = section:slider({name = "Health", min = 0, max = 100, default = 50, input = true})
+				items.playerLabel = section:label({name = "Player: "})
+				items.distanceLabel = section:label({name = "Distance: "})
+				items.levelLabel = section:label({name = "Level: "})
+				
+				items.slider = section:slider({name = "", min = 0, max = 100, default = 50, input = true})
 				
 				library:create( "UIStroke" , {
 					Parent = items.InfoTitle
@@ -1217,9 +1220,10 @@
 			    items.slider.max = int
 			end
 
-			function cfg.change_profile(player)
-				--items.label.set(string.format("Player: %s (%s)", player.Name, player.DisplayName))
-				items.label.set(string.format("%s (%s)", player.Name, player.DisplayName))
+			function cfg.change_profile(player, distance, level)
+				items.playerLabel.set(string.format("%s (%s)", player.Name, player.DisplayName))
+				items.distanceLabel.set(string.format("Distance: %s studs", math.round(distance)))
+				items.levelLabel.set(string.format("Distance: %s studs", level))
 				items.Profile.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
 			end 
 
@@ -5927,6 +5931,6 @@
 			return setmetatable(cfg, library)
 		end 
 	-- 
--- 
+--
 
 return library, themes; 
