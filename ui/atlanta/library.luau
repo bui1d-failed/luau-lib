@@ -1198,7 +1198,7 @@
 
 				local section = setmetatable(items, library)
 				items.label = section:label({name = "Player: "})
-				items.slider = section:slider({name = "Health", custom = themes.preset.accent, min = 0, max = 100, default = 50, input = true}) ; library:apply_theme(items.slider.fill, "accent", "BackgroundColor3")
+				items.slider = section:slider({name = "Health", custom = themes.preset.accent, min = 0, max = 100, default = 50, input = true}) ; items.slider:set_color(themes.preset.accent)
 				
 				library:create( "UIStroke" , {
 					Parent = items.InfoTitle
@@ -3150,7 +3150,7 @@
 					Size = dim2(1, 0, 1, 0),
 					BorderSizePixel = 0,
 					BackgroundColor3 = cfg.custom_color or themes.preset.accent
-				}) if not cfg.custom_color then library:apply_theme(fill, "accent", "BackgroundColor3") end; 
+				}) if not cfg.custom_color then library:apply_theme(fill, "accent", "BackgroundColor3") end;
 				
 				local UIGradient = library:create("UIGradient", {
 					Parent = fill,
@@ -3208,6 +3208,10 @@
 					TEXT_LABEL.Visible = bool 
 				end 
 			end
+			
+			function cfg.set_color(color)
+                cfg.fill.BackgroundColor3 = color
+            end
 
 			if not cfg.input_disabled then 
 				library:connection(uis.InputChanged, function(input)
