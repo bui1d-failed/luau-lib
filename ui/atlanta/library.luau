@@ -1197,7 +1197,7 @@
 				});	
 
 				local section = setmetatable(items, library)
-				--items.label = section:label({name = "Player: "})
+				items.label = section:label({name = "Player: "})
 				items.slider = section:slider({name = "Health", min = 0, max = 100, default = 50, input = true})
 				
 				library:create( "UIStroke" , {
@@ -1218,7 +1218,8 @@
 			end
 
 			function cfg.change_profile(player)
-				items.label.set(string.format("Player: %s (%s)", player.Name, player.DisplayName))
+				--items.label.set(string.format("Player: %s (%s)", player.Name, player.DisplayName))
+				items.label.set(string.format("%s (%s)", player.Name, player.DisplayName))
 				items.Profile.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
 			end 
 
