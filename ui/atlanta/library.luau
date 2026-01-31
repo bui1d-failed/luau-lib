@@ -1200,7 +1200,7 @@
                 items.playerLabel = section:label({name = "Player"})
                 items.distanceLabel = section:label({name = "Distance"})
                 items.levelLabel = section:label({name = "Level"})
-				items.slider = section:slider({name = "", min = 0, max = 100, default = 50, input = true})
+				items.slider = section:slider({min = 0, max = 100, default = 50, input = true})
 
 				
 				library:create("UIStroke" , {Parent = items.InfoTitle});
