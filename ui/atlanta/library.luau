@@ -1197,8 +1197,8 @@
 				});	
 
 				local section = setmetatable(items, library)
-				items.label = section:label({name = "Player: "})
-				items.slider = section:slider({name = "Health", custom = themes.preset.accent, min = 0, max = 100, default = 50, input = true}) ; items.slider:set_color(themes.preset.accent)
+				--items.label = section:label({name = "Player: "})
+				items.slider = section:slider({name = "Health", min = 0, max = 100, default = 50, input = true})
 				
 				library:create( "UIStroke" , {
 					Parent = items.InfoTitle
@@ -3208,10 +3208,6 @@
 					TEXT_LABEL.Visible = bool 
 				end 
 			end
-			
-			function cfg.set_color(color)
-                cfg.fill.BackgroundColor3 = color
-            end
 
 			if not cfg.input_disabled then 
 				library:connection(uis.InputChanged, function(input)
