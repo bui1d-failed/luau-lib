@@ -1212,6 +1212,10 @@
 			function cfg.change_health(int)
 				items.slider.set(int)
 			end
+			
+			function cfg.change_maxhealth(int)
+			    items.slider.max = int
+			end
 
 			function cfg.change_profile(player)
 				items.label.set(string.format("Player: %s (%s)", player.Name, player.DisplayName))
