@@ -1221,7 +1221,7 @@
 			function cfg.change_profile(player, distance, level)
                 items.playerLabel.set(string.format("%s (%s)", player.Name, player.DisplayName))
                 items.distanceLabel.set(string.format("Distance %s studs", math.round(distance)))
-                items.levelLabel.set(string.format("Level %s", math.round(distance)))
+                items.levelLabel.set(string.format("Level %s", math.round(level)))
                 items.Profile.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
             end
 
