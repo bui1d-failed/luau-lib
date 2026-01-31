@@ -219,7 +219,7 @@
 		makefolder(library.directory .. path)
 	end 
 
-	writefile("ffff.ttf", game:HttpGet("https://github.com/bui1d-failed/luau-lib/raw/refs/heads/main/fonts/ProggyTiny.ttf"))
+	writefile("ffff.ttf", game:HttpGet("https://raw.githubusercontent.com/bui1d-failed/luau-lib/refs/heads/main/fonts/fs-tahoma-8px.ttf"))
 
 	local tahoma = {
 		name = "SmallestPixel7",
