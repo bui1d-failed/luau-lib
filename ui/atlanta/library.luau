@@ -494,14 +494,8 @@
 
 			return floor(number * multiplier + 0.5) / multiplier
 		end 
-
-		--[[function library:apply_theme(instance, theme, property) 
-			insert(themes.utility[theme][property], instance)
-		end]]
 		
 		function library:apply_theme(instance, theme, property)
-            themes.utility[theme] = themes.utility[theme] or {}
-            themes.utility[theme][property] = themes.utility[theme][property] or {}
             table.insert(themes.utility[theme][property], instance)
         end
 
@@ -1204,7 +1198,7 @@
 
 				local section = setmetatable(items, library)
 				items.label = section:label({name = "Player: "})
-				items.slider = section:slider({name = "Health", custom = themes.preset.accent, min = 0, max = 100, default = 50, input = true}) ; library:apply_theme(items.slider, "accent", "custom")
+				items.slider = section:slider({name = "Health", custom = themes.preset.accent, min = 0, max = 100, default = 50, input = true}) ; library:apply_theme(items.slider.fill, "accent", "BackgroundColor3")
 				
 				library:create( "UIStroke" , {
 					Parent = items.InfoTitle
