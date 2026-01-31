@@ -1199,7 +1199,7 @@
 				local section = setmetatable(items, library)
 
                 --items.playerTextLabel = section:label({name = "Player", TextXAlignment = Enum.TextXAlignment.Left})
-                items.playerTextLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Left})
+                --[[items.playerTextLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Left})
                 
                 items.distanceTextLabel = section:label({name = "Distance", TextXAlignment = Enum.TextXAlignment.Left})
                 items.distanceValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right})
@@ -1207,7 +1207,21 @@
                 items.levelTextLabel = section:label({name = "Level", TextXAlignment = Enum.TextXAlignment.Left})
                 items.levelValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right})
 
-				items.slider = section:slider({name = "", min = 0, max = 100, default = 50, input = true})
+				items.slider = section:slider({name = "", min = 0, max = 100, default = 50, input = true})]]
+				
+				items.playerFrame = library:create("Frame", {Parent = items.holder, Size = UDim2.new(1,0,0,14), BackgroundTransparency = 1})
+                items.playerValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Left, Parent = items.playerFrame, Size = UDim2.new(1,0,1,0)})
+                
+                items.distanceFrame = library:create("Frame", {Parent = items.holder, Size = UDim2.new(1,0,0,14), BackgroundTransparency = 1})
+                items.distanceTextLabel = section:label({name = "Distance", TextXAlignment = Enum.TextXAlignment.Left, Parent = items.distanceFrame, Size = UDim2.new(0.5,0,1,0)})
+                items.distanceValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right, Parent = items.distanceFrame, Size = UDim2.new(0.5,0,1,0)})
+                
+                items.levelFrame = library:create("Frame", {Parent = items.holder, Size = UDim2.new(1,0,0,14), BackgroundTransparency = 1})
+                items.levelTextLabel = section:label({name = "Level", TextXAlignment = Enum.TextXAlignment.Left, Parent = items.levelFrame, Size = UDim2.new(0.5,0,1,0)})
+                items.levelValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right, Parent = items.levelFrame, Size = UDim2.new(0.5,0,1,0)})
+                
+                items.slider = section:slider({name = "", min = 0, max = 100, default = 50, input = true})
+
 				
 				library:create("UIStroke" , {Parent = items.InfoTitle});
 			end
@@ -3262,6 +3276,7 @@
 			local cfg = {
 				enabled = options.enabled or nil,
 				name = options.name or "Toggle",
+				nametextcolor = options.nametextcolor or themes.preset.text,
 				flag = options.flag or tostring(random(1,9999999)),
 				callback = options.callback or function() end,
 				default = options.default or false,
@@ -3328,7 +3343,7 @@
 				local text = library:create("TextLabel", {
 					Parent = left_components,
 					FontFace = library.font,
-					TextColor3 = themes.preset.text,
+					TextColor3 = cfg.nametextcolor or themes.preset.text,
 					BorderColor3 = rgb(0, 0, 0),
 					Text = cfg.name,
 					Name = "text",
