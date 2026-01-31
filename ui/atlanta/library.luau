@@ -1197,30 +1197,10 @@
 				});	
 
 				local section = setmetatable(items, library)
-
-                --items.playerTextLabel = section:label({name = "Player", TextXAlignment = Enum.TextXAlignment.Left})
-                --[[items.playerTextLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Left})
-                
-                items.distanceTextLabel = section:label({name = "Distance", TextXAlignment = Enum.TextXAlignment.Left})
-                items.distanceValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right})
-                
-                items.levelTextLabel = section:label({name = "Level", TextXAlignment = Enum.TextXAlignment.Left})
-                items.levelValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right})
-
-				items.slider = section:slider({name = "", min = 0, max = 100, default = 50, input = true})]]
-				
-				items.playerFrame = library:create("Frame", {Parent = items.holder, Size = UDim2.new(1,0,0,14), BackgroundTransparency = 1})
-                items.playerValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Left, Parent = items.playerFrame, Size = UDim2.new(1,0,1,0)})
-                
-                items.distanceFrame = library:create("Frame", {Parent = items.holder, Size = UDim2.new(1,0,0,14), BackgroundTransparency = 1})
-                items.distanceTextLabel = section:label({name = "Distance", TextXAlignment = Enum.TextXAlignment.Left, Parent = items.distanceFrame, Size = UDim2.new(0.5,0,1,0)})
-                items.distanceValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right, Parent = items.distanceFrame, Size = UDim2.new(0.5,0,1,0)})
-                
-                items.levelFrame = library:create("Frame", {Parent = items.holder, Size = UDim2.new(1,0,0,14), BackgroundTransparency = 1})
-                items.levelTextLabel = section:label({name = "Level", TextXAlignment = Enum.TextXAlignment.Left, Parent = items.levelFrame, Size = UDim2.new(0.5,0,1,0)})
-                items.levelValueLabel = section:label({name = "", TextXAlignment = Enum.TextXAlignment.Right, Parent = items.levelFrame, Size = UDim2.new(0.5,0,1,0)})
-                
-                items.slider = section:slider({name = "", min = 0, max = 100, default = 50, input = true})
+                items.playerLabel = section:label({name = "Player"})
+                items.distanceLabel = section:label({name = "Distance"})
+                items.levelLabel = section:label({name = "Level"})
+				items.slider = section:slider({name = "", min = 0, max = 100, default = 50, input = true})
 
 				
 				library:create("UIStroke" , {Parent = items.InfoTitle});
@@ -1239,14 +1219,9 @@
 			end
 
 			function cfg.change_profile(player, distance, level)
-                items.playerTextLabel.set(string.format("%s (%s)", player.Name, player.DisplayName))
-            
-                items.distanceTextLabel.set("Distance")
-                items.distanceValueLabel.set(string.format("%s studs", math.round(distance)))
-            
-                items.levelTextLabel.set("Level")
-                items.levelValueLabel.set(tostring(level))
-            
+                items.playerLabel.set(string.format("%s (%s)", player.Name, player.DisplayName))
+                items.distanceLabel.set(string.format("Distance %s studs", math.round(distance)))
+                items.levelLabel.set(string.format("Level %s", math.round(distance)))
                 items.Profile.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
             end
 
