@@ -219,7 +219,7 @@
 		makefolder(library.directory .. path)
 	end 
 
-	writefile("ffff.ttf", game:HttpGet("https://raw.githubusercontent.com/bui1d-failed/luau-lib/refs/heads/main/fonts/ProggyTiny.ttf"))
+	writefile("fs-tahoma-8px.ttf", game:HttpGet("https://raw.githubusercontent.com/bui1d-failed/luau-lib/refs/heads/main/fonts/fs-tahoma-8px.ttf"))
 
 	local tahoma = {
 		name = "SmallestPixel7",
@@ -228,14 +228,14 @@
 				name = "Regular",
 				weight = 400,
 				style = "normal",
-				assetId = getcustomasset("ffff.ttf")
+				assetId = getcustomasset("fs-tahoma-8px.ttf")
 			}
 		}
 	}
 
-	writefile("dddd.ttf", http_service:JSONEncode(tahoma))
+	writefile("fs-tahoma-8px-dddd.ttf", http_service:JSONEncode(tahoma))
 
-	library.font = Font.new(getcustomasset("dddd.ttf"), Enum.FontWeight.Regular)
+	library.font = Font.new(getcustomasset("fs-tahoma-8px-dddd.ttf"), Enum.FontWeight.Regular)
 
 	local config_holder 
 -- 
