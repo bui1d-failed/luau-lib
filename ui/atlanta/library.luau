@@ -1637,11 +1637,11 @@
 					image = "rbxassetid://115194686863276",
 				})
 
-				local watermark = library:watermark({default = os.date('koishihook | 514 FOREVER')})  
+				local watermark = library:watermark({default = os.date('koishihook | FOREVER')})  
 
 				task.spawn(function()
 					while task.wait(1) do 
-						watermark.change_text(os.date('koishihook | 514 FOREVER'))
+						watermark.change_text(os.date('koishihook | FOREVER'))
 					end 
 				end) 
 
