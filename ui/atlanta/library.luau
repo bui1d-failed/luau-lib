@@ -340,73 +340,76 @@
 			end)
 		end
 
-        function library:draggify(frame)
-            local dragging = false
-            local start_size = frame.Position
-            local start
-            local touch_id = nil
-        
-            local function on_drag_begin(position)
-                dragging = true
-                start = position
-                start_size = frame.Position
-                if library.current_element_open then
-                    library.current_element_open.set_visible(false)
-                    library.current_element_open.open = false
-                    library.current_element_open = nil
-                end
-                if frame.Parent:IsA("ScreenGui") and frame.Parent.DisplayOrder ~= 999999 then
-                    library.display_orders += 1
-                    frame.Parent.DisplayOrder = library.display_orders
-                end
-            end
-        
-            local function on_drag_move(position)
-                if not dragging then return end
-                local viewport_x = camera.ViewportSize.X
-                local viewport_y = camera.ViewportSize.Y
-                frame.Position = dim2(
-                    0,
-                    clamp(
-                        start_size.X.Offset + (position.X - start.X),
-                        0,
-                        viewport_x - frame.Size.X.Offset
-                    ),
-                    0,
-                    clamp(
-                        start_size.Y.Offset + (position.Y - start.Y),
-                        0,
-                        viewport_y - frame.Size.Y.Offset
-                    )
-                )
-            end
-        
-            frame.InputBegan:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    on_drag_begin(input.Position)
-                elseif input.UserInputType == Enum.UserInputType.Touch and touch_id == nil then
-                    touch_id = input
-                    on_drag_begin(input.Position)
-                end
-            end)
-        
-            frame.InputEnded:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    dragging = false
-                elseif input.UserInputType == Enum.UserInputType.Touch and input == touch_id then
-                    dragging = false
-                    touch_id = nil
-                end
-            end)
-        
-            library:connection(uis.InputChanged, function(input)
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
-                    on_drag_move(input.Position)
-                elseif input.UserInputType == Enum.UserInputType.Touch and input == touch_id then
-                    on_drag_move(input.Position)
-                end
-            end)
-        end
+        function library:draggify(frame, drag_height)
+		    drag_height = drag_height or 18
+		
+		    local drag_zone = Instance.new("TextButton")
+		    drag_zone.Size = UDim2.new(1, 0, 0, drag_height)
+		    drag_zone.Position = UDim2.new(0, 0, 0, 0)
+		    drag_zone.BackgroundTransparency = 1
+		    drag_zone.ZIndex = 100
+		    drag_zone.Text = ""
+		    drag_zone.BorderSizePixel = 0
+		    drag_zone.Parent = frame
+		
+		    local dragging = false
+		    local start_size = frame.Position
+		    local start
+		    local touch_id = nil
+		
+		    local function on_drag_begin(position)
+		        dragging = true
+		        start = position
+		        start_size = frame.Position
+		        if library.current_element_open then
+		            library.current_element_open.set_visible(false)
+		            library.current_element_open.open = false
+		            library.current_element_open = nil
+		        end
+		        if frame.Parent:IsA("ScreenGui") and frame.Parent.DisplayOrder ~= 999999 then
+		            library.display_orders += 1
+		            frame.Parent.DisplayOrder = library.display_orders
+		        end
+		    end
+		
+		    local function on_drag_move(position)
+		        if not dragging then return end
+		        local viewport_x = camera.ViewportSize.X
+		        local viewport_y = camera.ViewportSize.Y
+		        frame.Position = dim2(
+		            0,
+		            clamp(start_size.X.Offset + (position.X - start.X), 0, viewport_x - frame.Size.X.Offset),
+		            0,
+		            clamp(start_size.Y.Offset + (position.Y - start.Y), 0, viewport_y - frame.Size.Y.Offset)
+		        )
+		    end
+		
+		    drag_zone.InputBegan:Connect(function(input)
+		        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		            on_drag_begin(input.Position)
+		        elseif input.UserInputType == Enum.UserInputType.Touch and touch_id == nil then
+		            touch_id = input
+		            on_drag_begin(input.Position)
+		        end
+		    end)
+		
+		    drag_zone.InputEnded:Connect(function(input)
+		        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		            dragging = false
+		        elseif input.UserInputType == Enum.UserInputType.Touch and input == touch_id then
+		            dragging = false
+		            touch_id = nil
+		        end
+		    end)
+		
+		    library:connection(uis.InputChanged, function(input)
+		        if input.UserInputType == Enum.UserInputType.MouseMovement then
+		            on_drag_move(input.Position)
+		        elseif input.UserInputType == Enum.UserInputType.Touch and input == touch_id then
+		            on_drag_move(input.Position)
+		        end
+		    end)
+		end
 
 		function library:new_drawing(class, properties)
 			local ins = Drawing.new(class)
