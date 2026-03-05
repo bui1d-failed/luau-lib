@@ -1845,6 +1845,29 @@
 
 			return setmetatable(window, library)
 		end
+		
+		local function apply_scale()
+            local viewport = camera.ViewportSize
+            local base_width = 604
+            local base_height = 628
+            
+            local scale_x = viewport.X / base_width
+            local scale_y = viewport.Y / base_height
+            local scale = math.min(scale_x, scale_y, 1)
+            
+            for _, gui in library.guis do
+                local existing = gui:FindFirstChildOfClass("UIScale")
+                if not existing then
+                    existing = Instance.new("UIScale")
+                    existing.Parent = gui
+                end
+                existing.Scale = scale
+            end
+        end
+        
+        apply_scale()
+        
+        camera:GetPropertyChangedSignal("ViewportSize"):Connect(apply_scale)
 
 		function library:watermark(options) 
 			local cfg = {
