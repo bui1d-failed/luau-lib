@@ -242,6 +242,11 @@
 
 -- library functions 
 	-- misc functions
+        local function get_scale()
+            local viewport = camera.ViewportSize
+            return math.min(viewport.X / 604, viewport.Y / 628, 1)
+        end
+        
 		function library:hoverify(hover, parent) 
 			local hover_instance = library:create("Frame", {
 				Parent = parent,
@@ -566,10 +571,6 @@
             return ins 
         end
         
-        local function get_scale()
-            local viewport = camera.ViewportSize
-            return math.min(viewport.X / 604, viewport.Y / 628, 1)
-        end
 	-- 
 
 	-- elements 
