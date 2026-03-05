@@ -242,11 +242,6 @@
 
 -- library functions 
 	-- misc functions
-        local function get_scale()
-            local viewport = camera.ViewportSize
-            return math.min(viewport.X / 604, viewport.Y / 628, 1)
-        end
-        
 		function library:hoverify(hover, parent) 
 			local hover_instance = library:create("Frame", {
 				Parent = parent,
@@ -552,25 +547,21 @@
 		end
 
 		function library:create(instance, options)
-            local ins = Instance.new(instance) 
-            
-            for prop, value in next, options do 
-                ins[prop] = value
-            end
-            
-            if instance == "TextLabel" or instance == "TextButton" or instance == "TextBox" then 	
-                library:apply_theme(ins, "text", "TextColor3")
-                library:apply_stroke(ins)
-            elseif instance == "ScreenGui" then 
-                insert(library.guis, ins)
-                local ui_scale = Instance.new("UIScale")
-                ui_scale.Scale = get_scale()
-                ui_scale.Parent = ins
-            end
-            
-            return ins 
-        end
-        
+			local ins = Instance.new(instance) 
+			
+			for prop, value in next, options do 
+				ins[prop] = value
+			end
+			
+			if instance == "TextLabel" or instance == "TextButton" or instance == "TextBox" then 	
+				library:apply_theme(ins, "text", "TextColor3")
+				library:apply_stroke(ins)
+			elseif instance == "ScreenGui" then 
+				insert(library.guis, ins)
+			end
+			
+			return ins 
+		end
 	-- 
 
 	-- elements 
@@ -1854,6 +1845,29 @@
 
 			return setmetatable(window, library)
 		end
+		
+		local function apply_scale()
+            local viewport = camera.ViewportSize
+            local base_width = 604
+            local base_height = 628
+            
+            local scale_x = viewport.X / base_width
+            local scale_y = viewport.Y / base_height
+            local scale = math.min(scale_x, scale_y, 1)
+            
+            for _, gui in library.guis do
+                local existing = gui:FindFirstChildOfClass("UIScale")
+                if not existing then
+                    existing = Instance.new("UIScale")
+                    existing.Parent = gui
+                end
+                existing.Scale = scale
+            end
+        end
+        
+        apply_scale()
+        
+        camera:GetPropertyChangedSignal("ViewportSize"):Connect(apply_scale)
 
 		function library:watermark(options) 
 			local cfg = {
@@ -5956,13 +5970,5 @@
 		end 
 	-- 
 --
-
-camera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-    local scale = get_scale()
-    for _, gui in library.guis do
-        local ui_scale = gui:FindFirstChildOfClass("UIScale")
-        if ui_scale then ui_scale.Scale = scale end
-    end
-end)
 
 return library, themes; 
