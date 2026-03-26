@@ -1637,7 +1637,7 @@
 					image = "rbxassetid://115194686863276",
 				})
 				
-				library.watermark = library:watermark({default = os.date('Atlanta |  - %b %d %Y - %H:%M:%S')})  
+				library.default_watermark = library:watermark({default = os.date('Atlanta |  - %b %d %Y - %H:%M:%S')})  
 
 				--[[task.spawn(function()
 					while task.wait(1) do 
@@ -1704,7 +1704,7 @@
 					library.keybind_list_frame.Visible = bool
 				end})
 				section:toggle({name = "Watermark", flag = "watermark", callback = function(bool)
-					library.watermark.set_visible(bool)
+					library.default_watermark.set_visible(bool)
 				end})
 				section:button_holder({})
 				section:button({name = "Copy JobId", callback = function()
