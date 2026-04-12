@@ -1936,7 +1936,7 @@
 			return cfg
 
 		end
-
+		--[[
 		function library:esp_preview(properties)
 			local cfg = {items = {}, rotation = 0; objects = {};}
 
@@ -2350,7 +2350,8 @@
 
 			return setmetatable(cfg, library)
 		end
-
+		]]
+		
 		function library:refresh_notifications()
 			for _, notif in next, library.notifications do
 				tween_service:Create(notif, TweenInfo.new(0.3, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Position = dim2(0, 20, 0, 72 + (_ * 28))}):Play()
@@ -3904,7 +3905,7 @@
 					BackgroundColor3 = rgb(255, 255, 255),
 					ZIndex = 3,
 				})
-				
+
 				local updating_hex = false
                 local hex_input = setmetatable(cfg, library):textbox({
                     placeholder = "#ffffff",
@@ -3979,7 +3980,7 @@
 				flags[cfg.flag] = {}
 				flags[cfg.flag]["Color"] = Color
 				flags[cfg.flag]["Transparency"] = a
-				
+
 				pcall(function()
                     if flags[cfg.flag .. "_HEX_INPUT"] ~= nil then
                         updating_hex = true
