@@ -3611,15 +3611,29 @@
 
 				local RainbowToggle = setmetatable(cfg, library):toggle({name = "Rainbow", flag = cfg.flag .. "_RAINBOW_FLAG"})
 
-				cfg.holder = library:create( "Frame" , {
-					Parent = colorpicker_holder;
-					Name = "\0";
-					Position = dim2(1, 2, 1, -23);
-					BorderColor3 = rgb(0, 0, 0);
-					AnchorPoint = vec2(1, 0);
-					Size = dim2(1, -80, 0, 0);
-					BorderSizePixel = 0;
-				});
+				cfg.holder = library:create("Frame", {
+                    Parent = colorpicker_holder,
+                    Name = "\0",
+                    Position = dim2(0, 6, 1, -40),
+                    BorderColor3 = rgb(0, 0, 0),
+                    Size = dim2(1, -12, 0, 0),
+                    BorderSizePixel = 0,
+                })
+                
+                local updating_hex = false
+                local hex_input = setmetatable(cfg, library):textbox({
+                    placeholder = "#ffffff",
+                    default = "",
+                    flag = cfg.flag .. "_HEX_INPUT",
+                    callback = function(text)
+                        if updating_hex then return end
+                        local clean = text:gsub("#", "")
+                        if #clean == 6 then
+                            local ok, parsed = pcall(Color3.fromHex, clean)
+                            if ok then cfg.set(parsed, a) end
+                        end
+                    end
+                })
 
 				local section = setmetatable(cfg, library)
 				section:button_holder({})
@@ -3904,23 +3918,6 @@
 					BackgroundColor3 = rgb(255, 255, 255),
 					ZIndex = 3,
 				})
-				
-				local updating_hex = false
-                local hex_input = setmetatable(cfg, library):textbox({
-                    placeholder = "#ffffff",
-                    default = "",
-                    flag = cfg.flag .. "_HEX_INPUT",
-                    callback = function(text)
-                        if updating_hex then return end
-                        local clean = text:gsub("#", "")
-                        if #clean == 6 then
-                            local ok, parsed = pcall(Color3.fromHex, clean)
-                            if ok then
-                                cfg.set(parsed, a)
-                            end
-                        end
-                    end
-                })
 			--
 
 			function cfg.set_visible(bool)
