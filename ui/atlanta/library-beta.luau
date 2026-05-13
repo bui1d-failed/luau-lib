@@ -960,7 +960,7 @@
 					Parent = sgui;
 					Name = "\0";
 					--Position = dim2(0, 400, 0, 500);
-					Position = dim2(0, camera.ViewportSize.X / 2 - 161, 0, camera.ViewportSize.Y - 200);
+					Position = dim2(0.5, -161, 1, -200);
 					BorderColor3 = rgb(0, 0, 0);
 					Size = dim2(0, 322, 0, 147);
 					BorderSizePixel = 0;
@@ -1385,7 +1385,7 @@
 					Active = true,
 					Draggable = true,
 					--Position = dim2(0, 50, 0, 200),
-					Position = dim2(0, camera.ViewportSize.X - 192, 0, camera.ViewportSize.Y / 2 - 12),
+					Position = dim2(1, -192, 0.5, -12),
 					BorderColor3 = rgb(0, 0, 0),
 					Size = dim2(0, 182, 0, 25),
 					BorderSizePixel = 0,
