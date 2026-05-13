@@ -3666,24 +3666,37 @@
 
 			local KEYBIND_ELEMENT;
 			if cfg.name then
-				KEYBIND_ELEMENT = library:create("TextLabel", {
-					Parent = library.keybind_list,
-					Name = "",
-					FontFace = library.font,
-					TextColor3 = themes.preset.text,
-					BorderColor3 = rgb(0, 0, 0),
-					Text = "[ Hold ]  Fly - X",
-					Size = dim2(1, -5, 0, 18),
-					Visible = false,
-					Position = dim2(0, 5, 0, -1),
-					BorderSizePixel = 0,
-					BackgroundTransparency = 1,
-					TextXAlignment = Enum.TextXAlignment.Left,
-					TextTruncate = Enum.TextTruncate.AtEnd,
-					AutomaticSize = Enum.AutomaticSize.Y,
-					TextSize = 12,
-					BackgroundColor3 = themes.preset.text
-				}, "text")
+			KEYBIND_ELEMENT = library:create("Frame", {
+                Parent = library.keybind_list,
+                Name = "",
+                Size = dim2(1, -5, 0, 18),
+                Visible = false,
+                Position = dim2(0, 5, 0, -1),
+                BorderSizePixel = 0,
+                BackgroundTransparency = 1,
+            })
+            
+            local name_label = library:create("TextLabel", {
+                Parent = KEYBIND_ELEMENT,
+                FontFace = library.font,
+                TextColor3 = themes.preset.text,
+                Text = "",
+                Size = dim2(1, 0, 1, 0),
+                BackgroundTransparency = 1,
+                TextXAlignment = Enum.TextXAlignment.Left,
+                TextSize = 12,
+            }, "text")
+            
+            local key_label = library:create("TextLabel", {
+                Parent = KEYBIND_ELEMENT,
+                FontFace = library.font,
+                TextColor3 = themes.preset.text,
+                Text = "",
+                Size = dim2(1, 0, 1, 0),
+                BackgroundTransparency = 1,
+                TextXAlignment = Enum.TextXAlignment.Right,
+                TextSize = 12,
+            }, "text")
 			end
 
 			local element_outline = library:create("TextButton", {
@@ -3979,8 +3992,10 @@
 						local __text = text and (tostring(text):gsub("KeyCode.", ""):gsub("UserInputType.", ""))
 
 						if cfg.name then
-							KEYBIND_ELEMENT.Text = "[ " .. string.upper(string.sub(cfg.mode, 1, 1)) .. string.sub(cfg.mode, 2) .. " ] " .. cfg.name .. " - " .. __text
-						end
+                            local mode_text = "[ " .. string.upper(string.sub(cfg.mode, 1, 1)) .. string.sub(cfg.mode, 2) .. " ] " .. cfg.name
+                            name_label.Text = mode_text
+                            key_label.Text = __text
+                        end
 					end
 				end
 
