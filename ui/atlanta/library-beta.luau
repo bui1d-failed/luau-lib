@@ -1200,7 +1200,7 @@
 				local section = setmetatable(items, library)
                 items.playerLabel = section:label({name = "Player"})
                 items.distanceLabel = section:label({name = "Distance"})
-                items.levelLabel = section:label({name = "Level"})
+                --items.levelLabel = section:label({name = "Level"})
 				items.slider = section:slider({min = 0, max = 100, default = 50, input = true})
 
 
@@ -1219,10 +1219,10 @@
 			    items.slider.max = int
 			end
 
-			function cfg.change_profile(player, distance, level)
+			function cfg.change_profile(player, distance)
                 items.playerLabel.set(string.format("@%s (%s)", player.Name, player.DisplayName))
                 items.distanceLabel.set(string.format("Distance %s studs", math.round(distance)))
-                items.levelLabel.set(string.format("Level %s", math.round(level)))
+                --items.levelLabel.set(string.format("Level %s", math.round(level)))
                 items.Profile.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png"
             end
 
